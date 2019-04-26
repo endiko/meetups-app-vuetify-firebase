@@ -19,7 +19,7 @@
     <v-toolbar dark class="cyan lighten-3">
       <v-toolbar-side-icon @click.native.stop="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">Встречи</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer"></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -63,9 +63,12 @@
 </template>
 
 <script>
+import svgIcon from './components/SvgIcon.vue'
 export default {
   name: 'App',
-  components: {},
+  components: {
+    svgIcon
+  },
   data() {
     return {
       sideNav: false
