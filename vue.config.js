@@ -1,4 +1,17 @@
 module.exports = {
+  pluginOptions: {
+    svgSprite: {
+      dir: 'src/assets/',
+      test: /\.(svg)(\?.*)?$/,
+      loaderOptions: {
+        extract: true,
+        spriteFilename: 'img/icons.[hash:8].svg' // or 'img/icons.svg' if filenameHashing == false
+      },
+      pluginOptions: {
+        plainSprite: true
+      }
+    }
+  },
   chainWebpack: config => {
     config.module
       .rule('svg-sprite')
