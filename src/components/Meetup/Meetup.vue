@@ -23,7 +23,12 @@
           mt-4
           style="font-size: 16px; font-weight: 300"
         >Место проведения: {{meetup.location}}</v-layout>
-        <v-layout row style="font-size: 16px; font-weight: 300" mt-1 mb-3>Время: {{meetup.fullDate}}</v-layout>
+        <v-layout
+          row
+          style="font-size: 16px; font-weight: 300"
+          mt-1
+          mb-3
+        >Время: {{meetup.fullDate | date}}</v-layout>
 
         <v-layout row mt-2>
           <v-spacer></v-spacer>

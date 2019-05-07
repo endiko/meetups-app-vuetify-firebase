@@ -12,7 +12,7 @@
               <v-flex xs12 sm12 md6 lg6 style="padding-left: 30px">
                 <v-card-title primary-title class="headline">{{item.title}}</v-card-title>
                 <v-card-text>
-                  <div>{{item.fullDate}}</div>
+                  <div>{{item.fullDate | date}}</div>
                   <div>{{item.description | truncate(150)}}</div>
                 </v-card-text>
 
