@@ -6,13 +6,17 @@ import router from './router'
 import store from './store'
 import AlertComponent from '@/components/Shared/Alert.vue'
 import EditMeetupDetailsDialog from '@/components/Meetup/Edit/EditMeetupDetailsDialog.vue'
-import EditMeetupDateDialog from '@/components/Meetup/Edit/EditMeetupDateDialog.vue'
+
+import truncateText from './filters/truncate'
+import date from './filters/date'
 
 Vue.config.productionTip = false
 
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-edit-meetup-details-dialog', EditMeetupDetailsDialog)
-Vue.component('app-edit-meetup-date-dialog', EditMeetupDateDialog)
+
+Vue.filter('truncate', truncateText)
+Vue.filter('date', date)
 
 new Vue({
   router,
