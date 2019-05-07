@@ -35,7 +35,14 @@
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
-
+                <v-layout row>
+                  <v-flex xs12>
+                    <span>
+                      Еще не зарегистрированы?
+                      <router-link to="/signup">Перейти к регистрации</router-link>
+                    </span>
+                  </v-flex>
+                </v-layout>
                 <v-layout row>
                   <v-flex xs12>
                     <v-btn type="submit">
