@@ -7,7 +7,7 @@
     </v-layout>
     <v-layout row wrap v-if="!loading">
       <v-flex xs12>
-        <v-carousel style="cursor: pointer" v-if="meetups">
+        <v-carousel style="cursor: pointer" v-if="meetups.length > 0" max-height="80vh">
           <v-carousel-item
             v-for="item in meetups"
             :src="item.imageUrl"
@@ -18,10 +18,6 @@
           </v-carousel-item>
         </v-carousel>
       </v-flex>
-    </v-layout>
-
-    <v-layout row wrap mt-2>
-      <v-flex xs12 sm6 class="text-xs-center">Присоединяйтесь!</v-flex>
     </v-layout>
   </v-container>
 </template>
