@@ -1,6 +1,12 @@
 <template>
   <v-dialog persistent v-model="registerDialog" width="400px">
-    <v-btn accent slot="activator">{{ userIsRegistered ? 'Не пойду' : 'Зарегистрироваться' }}</v-btn>
+    <v-btn
+      medium
+      color="#527965"
+      class="white--text"
+      accent
+      slot="activator"
+    >{{ userIsRegistered ? 'Вы зарегистрированы' : 'Зарегистрироваться' }}</v-btn>
     <v-card>
       <v-container>
         <v-layout row wrap>
@@ -19,8 +25,13 @@
           <v-flex xs12>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" flat="flat" @click="registerDialog = false">Отмена</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="onAgree">Подтвердить</v-btn>
+              <v-btn
+                medium
+                color="#af4448"
+                class="white--text"
+                @click="registerDialog = false"
+              >Отмена</v-btn>
+              <v-btn medium color="#527965" class="white--text" @click="onAgree">Подтвердить</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
