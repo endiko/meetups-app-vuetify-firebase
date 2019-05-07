@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="user">
     <v-layout row mt-5 mb-5>
       <v-flex xs12>
         <h1 class="headline">Профиль пользователя {{user.username}}</h1>
