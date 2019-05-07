@@ -62,8 +62,6 @@ export default new Vuex.Store({
     },
     setUser(state, payload) {
       state.user = payload
-
-      console.log('payload setUser: ' + payload.username)
     },
     setLoading(state, payload) {
       state.loading = payload
@@ -190,7 +188,6 @@ export default new Vuex.Store({
           })
         })
         .catch(error => console.log(error))
-      // reach out to firebase and store it
     },
     updateMeetupData({ commit }, payload) {
       commit('setLoading', true)
@@ -232,7 +229,6 @@ export default new Vuex.Store({
         .then(() => {
           commit('setLoading', false)
           commit('deleteMeetup', payload)
-          // commit('setLoadedMeetups')
         })
         .catch(error => {
           console.log(error)
@@ -257,7 +253,6 @@ export default new Vuex.Store({
                 fbKeys: {}
               }
 
-              console.log('newUser signUserUp: ' + newUser.username)
               commit('setUser', newUser)
             })
             .catch(error => {
@@ -296,10 +291,6 @@ export default new Vuex.Store({
         })
     },
     autoSignIn({ commit }, payload) {
-      console.log('autoSignIn payload: ')
-      console.log(payload)
-      console.log(payload.displayName)
-      console.log(payload['displayName'])
       commit('setUser', {
         id: payload.uid,
         registeredMeetups: [],
@@ -327,7 +318,6 @@ export default new Vuex.Store({
             registeredMeetups: registeredMeetups,
             fbKeys: swapped
           }
-          console.log('updatedUser fetchUserData: ' + updatedUser.username)
           commit('setLoading', false)
           commit('setUser', updatedUser)
         })
@@ -353,7 +343,6 @@ export default new Vuex.Store({
         state.loadedMeetups.find(meetup => meetup.id === meetupId)
     },
     user(state) {
-      console.log('user(state) getters: ' + state.user)
       return state.user
     },
     getUsersRegisteredMeetups(state) {
