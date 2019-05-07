@@ -20,6 +20,7 @@ export default new Vuex.Store({
         return
       }
       state.user.registeredMeetups.push(id)
+      state.user.username = payload.username
       state.user.fbKeys[id] = payload.fbKey
     },
     unregisterUserFromMeetup(state, payload) {
@@ -54,8 +55,15 @@ export default new Vuex.Store({
         meetup.fullDate = payload.fullDate
       }
     },
+    deleteMeetup(state, payload) {
+      let startIndex = state.loadedMeetups.indexOf(payload)
+
+      return state.loadedMeetups.splice(startIndex, 1)
+    },
     setUser(state, payload) {
       state.user = payload
+
+      console.log('payload setUser: ' + payload.username)
     },
     setLoading(state, payload) {
       state.loading = payload
@@ -213,30 +221,53 @@ export default new Vuex.Store({
           commit('setLoading', false)
         })
     },
+
+    deleteMeetup({ commit }, payload) {
+      commit('setLoading', true)
+      firebase
+        .database()
+        .ref('meetups')
+        .child(payload)
+        .remove()
+        .then(() => {
+          commit('setLoading', false)
+          commit('deleteMeetup', payload)
+          // commit('setLoadedMeetups')
+        })
+        .catch(error => {
+          console.log(error)
+          commit('setLoading', false)
+        })
+    },
     signUserUp({ commit }, payload) {
       commit('setLoading', true)
       commit('clearError')
       firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
-        .then(user => {
-          commit('setLoading', false)
-          const newUser = {
-            id: user.user.uid,
-            registeredMeetups: [],
-            fbKeys: {}
-          }
+        .then(cred => {
+          cred.user
+            .updateProfile({ displayName: payload.username })
+            .then(() => {
+              commit('setLoading', false)
+              const newUser = {
+                id: cred.user.uid,
+                username: payload.username,
+                registeredMeetups: [],
+                fbKeys: {}
+              }
 
-          // console.log(newUser)
-          commit('setUser', newUser)
-        })
-        .catch(error => {
-          commit('setLoading', false)
-          commit('setError', error)
-          console.log(
-            'Новая ошибка: ' + error,
-            'error message: ' + error.message
-          )
+              console.log('newUser signUserUp: ' + newUser.username)
+              commit('setUser', newUser)
+            })
+            .catch(error => {
+              commit('setLoading', false)
+              commit('setError', error)
+              console.log(
+                'Новая ошибка: ' + error,
+                'error message: ' + error.message
+              )
+            })
         })
     },
     signUserIn({ commit }, payload) {
@@ -249,6 +280,7 @@ export default new Vuex.Store({
           commit('setLoading', false)
           const newUser = {
             id: user.user.uid,
+            username: user.user.displayName,
             registeredMeetups: [],
             fbKeys: {}
           }
@@ -264,7 +296,16 @@ export default new Vuex.Store({
         })
     },
     autoSignIn({ commit }, payload) {
-      commit('setUser', { id: payload.uid, registeredMeetups: [], fbKeys: {} })
+      console.log('autoSignIn payload: ')
+      console.log(payload)
+      console.log(payload.displayName)
+      console.log(payload['displayName'])
+      commit('setUser', {
+        id: payload.uid,
+        registeredMeetups: [],
+        fbKeys: {},
+        username: payload.displayName
+      })
     },
     fetchUserData({ commit, getters }) {
       commit('setLoading', true)
@@ -282,10 +323,11 @@ export default new Vuex.Store({
           }
           const updatedUser = {
             id: getters.user.id,
+            username: getters.user.username,
             registeredMeetups: registeredMeetups,
             fbKeys: swapped
           }
-
+          console.log('updatedUser fetchUserData: ' + updatedUser.username)
           commit('setLoading', false)
           commit('setUser', updatedUser)
         })
@@ -311,7 +353,18 @@ export default new Vuex.Store({
         state.loadedMeetups.find(meetup => meetup.id === meetupId)
     },
     user(state) {
+      console.log('user(state) getters: ' + state.user)
       return state.user
+    },
+    getUsersRegisteredMeetups(state) {
+      return state.loadedMeetups.filter(meetup =>
+        state.user.registeredMeetups.find(rm => rm === meetup.id)
+      )
+    },
+    getUsersCreatedMeetups(state) {
+      return state.loadedMeetups.filter(
+        meetup => meetup.creatorId === state.user.id
+      )
     },
     loading(state) {
       return state.loading
