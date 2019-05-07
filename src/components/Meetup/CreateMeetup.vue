@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-layout row>
+    <v-layout row mt-5 mb-3>
       <v-flex xs12 sm6 offset-sm3>
-        <h4>Новая встреча</h4>
+        <h1 class="headline">Новая встреча</h1>
       </v-flex>
     </v-layout>
     <v-layout row>
@@ -20,7 +20,12 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn raised class="primary input__file--fake" @click="onPickFile">
+              <v-btn
+                medium
+                color="#527965"
+                class="white--text input__file--fake"
+                @click="onPickFile"
+              >
                 Загрузить фото
                 <v-icon right dark>cloud_upload</v-icon>
               </v-btn>
@@ -31,13 +36,6 @@
                 ref="fileInput"
                 @change="onFilePicked"
               >
-              <!-- <v-text-field
-                name="imageUrl"
-                label="Cсылка на фото"
-                id="image-url"
-                required
-                v-model="imageUrl"
-              ></v-text-field>-->
             </v-flex>
           </v-layout>
           <v-layout row v-show="imageUrl">
@@ -106,7 +104,12 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn :disabled="!formIsValid" type="submit">Создать встречу</v-btn>
+              <v-btn
+                :disabled="!formIsValid"
+                type="submit"
+                color="#527965"
+                class="white--text"
+              >Создать встречу</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -157,7 +160,6 @@ export default {
         title: this.title,
         location: this.location,
         image: this.image,
-        // imageUrl: this.imageUrl,
         description: this.description,
         fullDate: this.fullDate
       }
