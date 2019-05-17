@@ -17,7 +17,7 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar dark color="#e57373">
+      <v-toolbar dark color="#e57373" class="header-nav">
         <v-toolbar-side-icon @click.native.stop="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
         <router-link to="/" tag="span" style="cursor: pointer">
           <svg-base icon-name="logo" viewBox="0 0 97.502 97.502" class="logo">
@@ -25,7 +25,7 @@
           </svg-base>
         </router-link>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-xs-only">
+        <v-toolbar-items class="hidden-sm-and-down">
           <v-btn flat v-for="(item, index) in menuItems" :key="index" router :to="item.link">
             <v-icon left dark>{{item.icon}}</v-icon>
             {{item.title}}
@@ -132,6 +132,24 @@ export default {
     height: 36px;
   }
 }
+
+.header-nav {
+  @media only screen and (max-width: 959px) {
+    .logo {
+      width: 65px;
+      height: 65px;
+    }
+    .v-btn {
+      font-size: 0.9rem;
+      padding: 0 10px;
+    }
+    .v-icon {
+      margin-right: 0.4rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
 .footer {
   margin-top: -36px;
 }
