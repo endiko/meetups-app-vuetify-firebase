@@ -60,7 +60,7 @@
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs3 offset-xs3>
+            <v-flex xs12 sm6 offset-sm3>
               <v-menu
                 v-model="menuDate"
                 :close-on-content-click="false"
@@ -68,16 +68,24 @@
                 lazy
                 transition="scale-transition"
                 offset-y
-                full-width
+                min-width="290px"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="date" prepend-icon="event" readonly v-on="on"></v-text-field>
                 </template>
-                <v-date-picker v-model="date" @input="menuDate = false" locale="ru-RU"></v-date-picker>
+                <v-date-picker
+                  v-model="date"
+                  no-title
+                  scrollable
+                  color="#af4448"
+                  @input="menuDate = false"
+                  locale="ru-RU"
+                ></v-date-picker>
               </v-menu>
             </v-flex>
-
-            <v-flex xs3>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
               <v-menu
                 ref="menuTime"
                 v-model="menuTime"
@@ -87,7 +95,7 @@
                 lazy
                 transition="scale-transition"
                 offset-y
-                full-width
+                min-width="290"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="time" prepend-icon="access_time" readonly v-on="on"></v-text-field>
@@ -95,8 +103,8 @@
                 <v-time-picker
                   v-if="menuTime"
                   v-model="time"
-                  full-width
                   format="24hr"
+                  color="#af4448"
                   @click:minute="$refs.menuTime.save(time)"
                 ></v-time-picker>
               </v-menu>
