@@ -1,80 +1,63 @@
 <template>
-  <v-container v-if="user">
-    <v-layout row mt-5 mb-5>
-      <v-flex xs12>
-        <h1 class="headline">Профиль пользователя {{user.username}}</h1>
-      </v-flex>
-    </v-layout>
-    <v-layout row mb-3>
-      <v-flex>
-        <h3>Созданные встречи</h3>
-      </v-flex>
-    </v-layout>
+  <v-container v-if="user" fluid>
     <v-layout>
-      <v-flex>
-        <table v-if="getUsersCreatedMeetups.length > 0">
-          <thead>
-            <tr>
-              <th>Встреча</th>
-              <th>Место встречи</th>
-              <th>Краткое описание</th>
-              <th>Дата встречи</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="meetup in getUsersCreatedMeetups" :key="meetup.id">
-              <td data-th="Встреча">
-                <span>{{meetup.title}}</span>
-              </td>
-              <td data-th="Место встречи">
-                <span>{{meetup.location}}</span>
-              </td>
-              <td data-th="Краткое описание" class="table__desc">
-                <span>{{meetup.description | truncate(100)}}</span>
-              </td>
-              <td data-th="Дата встречи">
-                <span>{{meetup.fullDate | date}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p v-else>Пока встреч нет</p>
-      </v-flex>
-    </v-layout>
-    <v-layout row mt-5 mb-3>
-      <v-flex>
-        <h3>Зарегистрированные встречи</h3>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex>
-        <table v-if="getUsersRegisteredMeetups.length > 0">
-          <thead>
-            <tr>
-              <th>Встреча</th>
-              <th>Место встречи</th>
-              <th>Краткое описание</th>
-              <th>Дата встречи</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="meetup in getUsersRegisteredMeetups" :key="meetup.id">
-              <td data-th="Встреча">
-                <span>{{meetup.title}}</span>
-              </td>
-              <td data-th="Место встречи">
-                <span>{{meetup.location}}</span>
-              </td>
-              <td data-th="Краткое описание" class="table__desc">
-                <span>{{meetup.description | truncate(100)}}</span>
-              </td>
-              <td data-th="Дата встречи">
-                <span>{{meetup.fullDate | date}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p v-else>Пока встреч нет</p>
+      <v-flex xs12 sm8 offset-sm2>
+        <v-layout row mt-5 mb-3>
+          <v-flex xs12 sm6 offset-sm3>
+            <h1 class="headline">Профиль пользователя {{user.username}}</h1>
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <v-card>
+              <v-layout row wrap mb-3>
+                <v-flex xs12>
+                  <v-card-title>
+                    <h3>Созданные встречи</h3>
+                  </v-card-title>
+
+                  <v-card-text>
+                    <ul v-if="getUsersCreatedMeetups.length > 0">
+                      <li v-for="meetup in getUsersCreatedMeetups" :key="meetup.id">
+                        {{meetup.title}}
+                        <v-btn flat icon :to="'/meetups/' + meetup.id" color="#527965">
+                          <v-icon color="#527965">remove_red_eye</v-icon>
+                        </v-btn>
+                        <v-btn icon flat color="#527965" slot="activator">
+                          <v-icon color="#527965">edit</v-icon>
+                        </v-btn>
+                      </li>
+                    </ul>
+
+                    <p v-else>Пока встреч нет</p>
+                  </v-card-text>
+                </v-flex>
+              </v-layout>
+              <v-layout>
+                <v-flex xs12>
+                  <v-card-title>
+                    <h3>Зарегистрированные встречи</h3>
+                  </v-card-title>
+                  <v-card-text>
+                    <ul v-if="getUsersRegisteredMeetups.length > 0">
+                      <li v-for="meetup in getUsersRegisteredMeetups" :key="meetup.id">
+                        {{meetup.title}}
+                        <v-btn flat icon :to="'/meetups/' + meetup.id" color="#527965">
+                          <v-icon color="#527965">remove_red_eye</v-icon>
+                        </v-btn>
+                        <v-btn icon flat color="#527965" slot="activator">
+                          <v-icon color="#527965">edit</v-icon>
+                        </v-btn>
+                      </li>
+                    </ul>
+
+                    <p v-else>Пока встреч нет</p>
+                  </v-card-text>
+                </v-flex>
+              </v-layout>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -87,6 +70,7 @@ export default {
   },
   computed: {
     user() {
+      console.log(this.$store.getters.user)
       return this.$store.getters.user
     },
     getUsersRegisteredMeetups() {

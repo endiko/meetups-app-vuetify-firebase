@@ -1,13 +1,13 @@
 <template>
   <v-dialog width="500px" persistent v-model="editDialog">
-    <v-btn fab accent color="#c5e1a5" slot="activator">
-      <v-icon color="#af4448">edit</v-icon>
+    <v-btn icon flat color="#527965" slot="activator">
+      <v-icon color="#527965">edit</v-icon>
     </v-btn>
     <v-card>
       <v-container row wrap>
         <v-layout>
           <v-flex xs12>
-            <v-card-title>Редактировать встречу</v-card-title>
+            <v-card-title class="headline">Редактировать встречу</v-card-title>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>

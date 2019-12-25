@@ -19,7 +19,11 @@
         </v-carousel>
       </v-flex>
     </v-layout>-->
-
+    <v-layout>
+      <v-flex>
+        <h1 class="headline">Календарь встреч</h1>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap class="calendar__layout">
       <v-flex xs12>
         <v-sheet height="500">
@@ -41,11 +45,11 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap justify-space-between>
-      <v-btn depressed flat small color="#e57373" @click="$refs.calendar.prev()">
-        <v-icon color="#af4448">arrow_back</v-icon>
+      <v-btn medium color="#527965" class="white--text" @click="$refs.calendar.prev()">
+        <v-icon light>arrow_back</v-icon>
       </v-btn>
-      <v-btn depressed flat small color="#e57373" @click="$refs.calendar.next()">
-        <v-icon color="#af4448">arrow_forward</v-icon>
+      <v-btn medium color="#527965" class="white--text" @click="$refs.calendar.next()">
+        <v-icon light>arrow_forward</v-icon>
       </v-btn>
     </v-layout>
   </v-container>
@@ -61,7 +65,7 @@ export default {
   },
   computed: {
     meetups() {
-      return this.$store.getters.featuredMeetups
+      return this.$store.getters.loadedMeetups
     },
     loading() {
       return this.$store.getters.loading
@@ -73,6 +77,7 @@ export default {
           meetup
         )
       )
+
       return map
     }
   },
@@ -108,7 +113,7 @@ export default {
   &__link {
     display: block;
     padding: 0.4rem 0.8rem;
-    background: #94af76;
+    background: #e57373;
     color: #ffffff;
     text-decoration: none;
     text-align: center;
@@ -117,7 +122,7 @@ export default {
     transition: 0.3s ease-in;
 
     &:hover {
-      background: #6a8053;
+      background: #af4448;
     }
   }
 }

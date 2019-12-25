@@ -57,7 +57,6 @@ export default new Vuex.Store({
     },
     deleteMeetup(state, payload) {
       let startIndex = state.loadedMeetups.indexOf(payload)
-
       return state.loadedMeetups.splice(startIndex, 1)
     },
     setUser(state, payload) {
@@ -121,7 +120,6 @@ export default new Vuex.Store({
         .then(data => {
           const meetups = []
           const obj = data.val()
-
           for (let key in obj) {
             meetups.push({
               id: key,
@@ -336,7 +334,7 @@ export default new Vuex.Store({
       return state.loadedMeetups.sort((a, b) => a.date > b.date)
     },
     featuredMeetups(state, getters) {
-      return getters.loadedMeetups.slice(0, 5)
+      return getters.loadedMeetups.slice(0, 6)
     },
     loadedMeetup(state) {
       return meetupId =>
