@@ -24,11 +24,11 @@ new Vue({
   render: h => h(App),
   created() {
     firebase.initializeApp({
-      apiKey: 'AIzaSyDdv0OOlxvbPM6QnPreH0T3GPZwsxN3YXc',
-      authDomain: 'meetups-67228.firebaseapp.com',
-      databaseURL: 'https://meetups-67228.firebaseio.com/',
-      projectId: 'meetups-67228',
-      storageBucket: 'gs://meetups-67228.appspot.com/'
+      apiKey: 'YOUR_API_KEY',
+      authDomain: 'YOUR_DOMAIN_NAME.firebaseapp.com',
+      databaseURL: 'https://your-name.firebaseio.com/',
+      projectId: 'YOUR_PROJECT_NAME',
+      storageBucket: 'gs://YOUR_PROJECT_NAME.appspot.com/'
     })
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
